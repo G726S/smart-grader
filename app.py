@@ -1,4 +1,4 @@
-from os import SCHED_OTHER
+import os
 import streamlit as st
 import pickle
 
@@ -35,7 +35,10 @@ with col2:
 
 dataset = load_dataset("trec", split="train")
 df = pd.DataFrame(dataset)[:450]
-api_key = 'AHKLrKZmFltl6RQHg4J2sNsqV4SS09YdEgLT31aL'
+api_key = os.environ.get('COHERE_API_KEY')
+if not api_key:
+    st.error('Set the COHERE_API_KEY environment variable to run this app.')
+    st.stop()
 
 co = cohere.Client(api_key)
 embeds = co.embed(texts=list(df['text']),

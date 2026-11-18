@@ -1,0 +1,9 @@
+streamlit
+pandas
+numpy
+cohere
+datasets
+annoy
+scikit-learn
+altair
+tqdm
